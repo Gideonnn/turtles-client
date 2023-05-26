@@ -25,7 +25,7 @@ export default function Tester() {
   const lastLength = useRef(0);
 
   const multiplier = Number(searchParams.get("multiplier")) || 1;
-  const url = searchParams.get("url");
+  const server = searchParams.get("server");
   const cache = searchParams.get("cache");
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function Tester() {
       const before = performance.now();
       try {
         const options: any = allowCache ? {} : { cache: "no-store" };
-        await fetch(url ?? "http://localhost:3001", options);
+        await fetch(server ?? "http://localhost:3001", options);
       } catch (e: any) {
         setError(e.message);
         setLoop(false);
@@ -82,7 +82,7 @@ export default function Tester() {
   };
 
   return (
-    <div className={`w-[800px] mx-auto`}>
+    <div className={`w-full mx-auto max-w-4xl`}>
       <Line className="mt-8 mb-8" data={data} />
 
       <button
