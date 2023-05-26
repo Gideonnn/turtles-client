@@ -47,12 +47,20 @@ export default function Tester() {
     return () => clearInterval(timer);
   }, []);
 
+  if (!url) {
+    return (
+      <div className="w-full max-w-4xl mx-auto">
+        <p className="mt-8">Please provide a url</p>
+      </div>
+    );
+  }
+
   const sendRequest = async (message?: string) => {
     for (let i = 0; i < multiplier; i++) {
       try {
         const before = performance.now();
         const options: any = allowCache ? {} : { cache: "no-store" };
-        await fetch(url ?? "http://localhost:3001", options);
+        await fetch(url, options);
         const after = performance.now();
         _timings.current.push(after - before);
       } catch (e: any) {
