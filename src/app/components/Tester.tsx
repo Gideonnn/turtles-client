@@ -25,7 +25,7 @@ export default function Tester() {
   const lastLength = useRef(0);
 
   const multiplier = Number(searchParams.get("multiplier")) || 1;
-  const server = searchParams.get("server");
+  const url = searchParams.get("url");
   const cache = searchParams.get("cache");
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function Tester() {
       try {
         const before = performance.now();
         const options: any = allowCache ? {} : { cache: "no-store" };
-        await fetch(server ?? "http://localhost:3001", options);
+        await fetch(url ?? "http://localhost:3001", options);
         const after = performance.now();
         _timings.current.push(after - before);
       } catch (e: any) {

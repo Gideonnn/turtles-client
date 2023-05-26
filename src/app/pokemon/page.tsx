@@ -5,19 +5,19 @@ export default async function Pokemon({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const server = searchParams.server as string;
+  const url = searchParams.server as string;
   const cache = searchParams.cache as string;
 
   let pokemon = [];
 
   if (cache === "false") {
     // No cache
-    pokemon = await fetch(server || "http://localhost:3001", {
+    pokemon = await fetch(url || "http://localhost:3001", {
       cache: "no-store",
     }).then((res) => res.json());
   } else {
     // Five second cache
-    pokemon = await fetch(server || "http://localhost:3001", {
+    pokemon = await fetch(url || "http://localhost:3001", {
       next: { revalidate: 5 },
     }).then((res) => res.json());
   }
