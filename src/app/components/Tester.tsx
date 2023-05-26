@@ -52,7 +52,7 @@ export default function Tester() {
       const before = performance.now();
       try {
         const options: any = allowCache ? {} : { cache: "no-store" };
-        await fetch(url ?? "http://37.251.53.160:3001", options);
+        await fetch(url ?? "http://localhost:3001", options);
       } catch (e: any) {
         setError(e.message);
         setLoop(false);
