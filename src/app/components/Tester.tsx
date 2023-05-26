@@ -49,17 +49,17 @@ export default function Tester() {
 
   const sendRequest = async (message?: string) => {
     for (let i = 0; i < multiplier; i++) {
-      const before = performance.now();
       try {
+        const before = performance.now();
         const options: any = allowCache ? {} : { cache: "no-store" };
         await fetch(server ?? "http://localhost:3001", options);
+        const after = performance.now();
+        _timings.current.push(after - before);
       } catch (e: any) {
         setError(e.message);
         setLoop(false);
         console.error(e);
       }
-      const after = performance.now();
-      _timings.current.push(after - before);
     }
   };
 
